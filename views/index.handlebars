@@ -1,10 +1,33 @@
 <h4>This is index page! 老爸的私房錢</h4>
 
-{{!-- 
-在首頁一次瀏覽所有支出的清單
-在首頁看到所有支出清單的總金額
-新增一筆支出
-編輯支出的所有屬性 (一次只能編輯一筆)
-刪除任何一筆支出 (一次只能刪除一筆) 
-在首頁可以根據支出「類別」篩選支出；總金額的計算只會包括被篩選出來的支出總和。
---}}
+<h4 class="totalAmount">總金額：</h4>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">日期</th>
+      <th scope="col">名稱</th>
+      <th scope="col">類別</th>
+      <th scope="col">金額</th>
+      <th scope="col">管理</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each records}}
+    <tr>
+      <td>{{this.date}}</td>
+      <td>{{this.name}}</td>
+      <td>{{this.category}}</td>
+      <td>{{this.amount}}</td>
+      <td>
+        <a class="btn btn-success" href="./expenses/{{ this._id }}/edit">Edit</a>
+        <form action="./todos/{{ this._id }}/?_method=DELETE" method="POST" style="display: inline;">
+          <button class="btn btn-danger" type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+
+<a class="btn btn-outline-info" href="./expenses/create">Create</a>

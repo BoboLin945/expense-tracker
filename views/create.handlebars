@@ -1,8 +1,26 @@
-<h4>This will be create page! 新增一筆支出</h4>
+<h4>請輸入你的支出</h4>
 
-{{!-- 
+<form action="/expenses" method="POST">
+  <div class="form-group">
+    <label for="name">名稱* ：</label>
+    <input class="form-control" type="text" placeholder="" name="name" required>
+    <label for="date">日期* ：</label>
+    <input class="form-control" type="date" placeholder="" name="date" required>
+    <label for="category">名稱* ：</label>
+    <select class="form-control" name="category">
+      {{#each categories}}
+      <option name="{{this.name}}">{{this.name}}</option>
+      {{/each}}
+    </select>
+    <label for="amount">金額* ：</label>
+    <input class="form-control" type="text" placeholder="" name="amount" required>
+  </div>
+  <button class="btn btn-success" type="submit">新增支出</button>
+</form>
+
+{{!--
 名稱
 日期
 類別
-金額 
+金額
 --}}

@@ -14,6 +14,9 @@ const app = express()
 app.engine('handlebars', exphbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
+// body-parser
+app.use(express.urlencoded({ extended: true }))
+
 // use routes
 app.use(routes)
 
