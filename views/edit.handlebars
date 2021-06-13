@@ -1,8 +1,22 @@
 <h4>This will be create page! 編輯一筆支出</h4>
 
-{{!--
-名稱
-日期
-類別
-金額
---}}
+<h4>請編輯你的支出</h4>
+
+<form action="/expenses/{{ record._id }}/?_method=PUT" method="POST">
+  <div class="form-group">
+    <label for="name">名稱* ：</label>
+    <input class="form-control" type="text" placeholder="" name="name" value="{{record.name}}" required>
+    <label for="date">日期* ：</label>
+    <input class="form-control" type="date" placeholder="" name="date" value="{{date}}" required>
+    <label for="category">類別* ：</label>
+    <select class="form-control" name="category">
+      {{#each categories}}
+      <option value="{{this.name}}" name="{{this.name}}" {{#if ( eq ../category this.name ) }} selected {{/if}}>
+        {{this.name}}</option>
+      {{/each}}
+    </select>
+    <label for="amount">金額* ：</label>
+    <input class="form-control" type="text" placeholder="" name="amount" value="{{record.amount}}" required>
+  </div>
+  <button class="btn btn-success" type="submit">修改支出</button>
+</form>

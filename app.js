@@ -1,9 +1,17 @@
 const express = require('express')
 const PORT = 3000
 const exphbs = require('express-handlebars')
+const methodOverride = require('method-override')
+
+// Require handlebars and just-handlebars-helpers
+const Handlebars = require('handlebars')
+const H = require('just-handlebars-helpers')
 
 // routes setting
 const routes = require('./routes')
+
+// Register just-handlebars-helpers with handlebars
+H.registerHelpers(Handlebars)
 
 // mongoose setting
 require('./config/mongoose')
@@ -16,6 +24,9 @@ app.set('view engine', 'handlebars')
 
 // body-parser
 app.use(express.urlencoded({ extended: true }))
+
+// method-override
+app.use(methodOverride('_method'))
 
 // use routes
 app.use(routes)
