@@ -21,7 +21,7 @@
       <td>{{this.amount}}</td>
       <td>
         <a class="btn btn-success" href="./expenses/{{ this._id }}/edit">Edit</a>
-        <form action="./todos/{{ this._id }}/?_method=DELETE" method="POST" style="display: inline;">
+        <form action="./expenses/{{ this._id }}/?_method=DELETE" method="POST" style="display: inline;">
           <button class="btn btn-danger" type="submit">Delete</button>
         </form>
       </td>
