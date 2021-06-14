@@ -10,14 +10,20 @@ router.get('/', (req, res) => {
     .lean()
     .then(records => {
       let totalAmount = 0
-      records.forEach((record) => totalAmount += record.amount)
-      Category
-      .find()
-      .lean()
-      .then(categories => {
-        res.render('index', { records, categories, totalAmount })
-      })
-      .catch(error => console.log(error))
+      Category.find()
+        .lean()
+        .then(categories => {
+          records.forEach(record => {
+            totalAmount += record.amount
+            const category = categories.find(category => {
+              if(category.name === record.category) {
+                record.icon = category.icon
+              }
+            })
+          })
+          res.render('index', { records, categories, totalAmount })
+        })
+        .catch(error => console.log(error))
     })
     .catch(error => console.log(error))
 })
@@ -29,12 +35,19 @@ router.post('/filter', (req, res) => {
     .aggregate([{ $match: { category: category } }])
     .then(records => {
       let totalAmount = 0
-      records.forEach((record) => totalAmount += record.amount)
       Category
         .find()
         .lean()
         .then(categories => {
-          res.render('index', { records, categories, category, totalAmount })
+          records.forEach((record) => {
+            totalAmount += record.amount
+            const category = categories.find(category => {
+              if (category.name === record.category) {
+                record.icon = category.icon
+              }
+            })
+          })
+          res.render('index', { records, categories, totalAmount, category })
         })
     })
 })
@@ -56,6 +69,5 @@ function convertDate(date) {
   }
   return (year + '-' + month + '-' + day)
 }
-
 
 module.exports = router

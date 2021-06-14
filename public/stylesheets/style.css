@@ -1,0 +1,13 @@
+.container {
+  margin: 0 auto;
+}
+
+.totalAmount {
+  color: orange;
+  font-size: 54px;
+}
+
+.icon, .amount, .management {
+  text-align: center;
+  
+}

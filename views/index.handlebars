@@ -1,8 +1,6 @@
-<h4>This is index page! 老爸的私房錢</h4>
-
 {{!-- 類別 filter --}}
 <form action="/filter" method="POST">
-  <select class="form-control" name="category" onchange="this.form.submit()">
+  <select class="form-control w-50 mt-4" name="category" onchange="this.form.submit()">
     <option disabled selected>請選擇</option>
     {{#each categories}}
     <option value="{{ this.name }}" name="{{this.name}}" {{#if ( eq ../category this.name ) }} selected {{/if}}>
@@ -11,10 +9,14 @@
   </select>
 </form>
 
-<h4 class="mt-5 totalAmount">總金額： {{ totalAmount }}</h4>
+<div class="total d-flex">
+  <h5 class="mt-4">總金額：</h5>
+  <p class="mt-5 totalAmount"> {{ totalAmount }}</p>
+</div>
 
-<table class="table table-striped">
-  <thead>
+
+<table class="table">
+  {{!-- <thead>
     <tr>
       <th scope="col">日期</th>
       <th scope="col">名稱</th>
@@ -22,21 +24,26 @@
       <th scope="col">金額</th>
       <th scope="col">管理</th>
     </tr>
-  </thead>
+  </thead> --}}
   <tbody>
     {{#each records}}
     <tr>
-      <td>{{this.date}})</td>
-      <td>{{this.name}}</td>
-      <td>{{this.category}}</td>
-      <td>{{this.amount}}</td>
-      <td>
-        <a class="btn btn-success" href="./expenses/{{ this._id }}/edit">Edit</a>
+      <th class="icon align-middle" rowspan="2"><i class="{{ this.icon }} fa-2x"></i></th>
+      <th>{{this.name}}</th>
+      <th class="amount align-middle" rowspan="2">{{this.amount}}</th>
+      <th class="management align-middle" rowspan="2">
+        <a class="btn btn-success mr-2" href="./expenses/{{ this._id }}/edit">Edit</a>
         <form action="./expenses/{{ this._id }}/?_method=DELETE" method="POST" style="display: inline;">
           <button class="btn btn-danger" type="submit">Delete</button>
         </form>
-      </td>
+      </th>
     </tr>
+    <tr>
+      <td>{{this.date}}</td>
+    </tr>
+
+
+
     {{/each}}
   </tbody>
 </table>

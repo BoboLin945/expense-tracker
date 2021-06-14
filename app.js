@@ -28,6 +28,9 @@ app.use(express.urlencoded({ extended: true }))
 // method-override
 app.use(methodOverride('_method'))
 
+// static files
+app.use(express.static('public'))
+
 // use routes
 app.use(routes)
 
