@@ -9,11 +9,13 @@ router.get('/', (req, res) => {
   Record.find()
     .lean()
     .then(records => {
+      let totalAmount = 0
+      records.forEach((record) => totalAmount += record.amount)
       Category
       .find()
       .lean()
       .then(categories => {
-        res.render('index', { records, categories })
+        res.render('index', { records, categories, totalAmount })
       })
       .catch(error => console.log(error))
     })
@@ -26,11 +28,13 @@ router.post('/filter', (req, res) => {
   Record
     .aggregate([{ $match: { category: category } }])
     .then(records => {
+      let totalAmount = 0
+      records.forEach((record) => totalAmount += record.amount)
       Category
         .find()
         .lean()
         .then(categories => {
-          res.render('index', { records, categories, category })
+          res.render('index', { records, categories, category, totalAmount })
         })
     })
 })

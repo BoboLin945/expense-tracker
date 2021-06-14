@@ -3,7 +3,7 @@
 {{!-- 類別 filter --}}
 <form action="/filter" method="POST">
   <select class="form-control" name="category" onchange="this.form.submit()">
-    <option value="" disabled selected>請選擇</option>
+    <option disabled selected>請選擇</option>
     {{#each categories}}
     <option value="{{ this.name }}" name="{{this.name}}" {{#if ( eq ../category this.name ) }} selected {{/if}}>
       {{this.name}}</option>
@@ -11,7 +11,7 @@
   </select>
 </form>
 
-<h4 class="mt-5 totalAmount">總金額：</h4>
+<h4 class="mt-5 totalAmount">總金額： {{ totalAmount }}</h4>
 
 <table class="table table-striped">
   <thead>
