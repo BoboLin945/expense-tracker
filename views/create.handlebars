@@ -8,6 +8,7 @@
     <input class="form-control" type="date" placeholder="" name="date" required>
     <label for="category">類別* ：</label>
     <select class="form-control" name="category">
+      <option value="" disabled selected>請選擇</option>
       {{#each categories}}
       <option value="{{ this.name }}"name="{{this.name}}">{{this.name}}</option>
       {{/each}}
