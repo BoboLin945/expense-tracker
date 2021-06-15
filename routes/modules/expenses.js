@@ -53,7 +53,7 @@ router.put('/:id', (req, res) => {
       record.amount = amount
       return record.save()
     })
-    .then(() => res.redirect(`/`))
+    .then(() => res.redirect(`/expenses/${id}/edit`))
     .catch(error => console.log(error))
 })
 

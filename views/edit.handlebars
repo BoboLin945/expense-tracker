@@ -1,14 +1,20 @@
-<h4>This will be create page! 編輯一筆支出</h4>
+<h4 class="mt-4 text-center">請編輯你的支出</h4>
+<p class="font-italic">* 為必填</p>
 
-<h4>請編輯你的支出</h4>
-
+{{!-- edit form --}}
 <form action="/expenses/{{ record._id }}/?_method=PUT" method="POST">
-  <div class="form-group">
-    <label for="name">名稱* ：</label>
+  <div class="form-group" id="editForm">
+    <label for="name">名稱 * ：</label>
     <input class="form-control" type="text" placeholder="" name="name" value="{{record.name}}" required>
-    <label for="date">日期* ：</label>
+    <div class="invalid-feedback ml-4">
+      支出名稱不能為空白！
+    </div>
+    <label for="date">日期 * ：</label>
     <input class="form-control" type="date" placeholder="" name="date" value="{{date}}" required>
-    <label for="category">類別* ：</label>
+    <div class="invalid-feedback ml-4">
+      請選擇日期！
+    </div>
+    <label for="category">類別 * ：</label>
     <select class="form-control" name="category">
       <option value="" disabled selected>請選擇</option>
       {{#each categories}}
@@ -16,8 +22,39 @@
         {{this.name}}</option>
       {{/each}}
     </select>
-    <label for="amount">金額* ：</label>
-    <input class="form-control" type="text" placeholder="" name="amount" value="{{record.amount}}" required>
+    <div class="invalid-feedback ml-4">
+      請選擇支出類別！
+    </div>
+    <label for="amount">金額 * ：</label>
+    <input class="form-control" type="number" min="0" max="10000000" step="1" name="amount" value="{{record.amount}}"
+      required>
+    <div class="invalid-feedback ml-4">
+      請輸入支出金額！
+    </div>
   </div>
-  <button class="btn btn-success" type="submit">修改支出</button>
+  <div class="d-flex justify-content-end">
+    <button class="btn btn-outline-success mt-4 mr-2" type="submit">修改支出</button>
+    <a href="/" class="btn btn-outline-secondary mt-4">取消</a>
+  </div>
 </form>
+
+{{!-- bootstrap validation --}}
+<script>
+  (function () {
+    'use strict';
+    window.addEventListener('load', function () {
+      // Fetch all the forms we want to apply custom Bootstrap validation styles to
+      var forms = document.getElementsByClassName('needs-validation');
+      // Loop over them and prevent submission
+      var validation = Array.prototype.filter.call(forms, function (form) {
+        form.addEventListener('submit', function (event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+</script>

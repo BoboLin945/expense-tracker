@@ -1,6 +1,6 @@
-{{!-- 類別 filter --}}
+{{!-- filter --}}
 <form action="/filter" method="POST">
-  <select class="form-control w-50 mt-4" name="category" onchange="this.form.submit()">
+  <select id="filterSelect" class="form-control mt-4" name="category" onchange="this.form.submit()">
     <option disabled selected>請選擇</option>
     {{#each categories}}
     <option value="{{ this.name }}" name="{{this.name}}" {{#if ( eq ../category this.name ) }} selected {{/if}}>
@@ -9,18 +9,19 @@
   </select>
 </form>
 
+{{!-- totalAmount --}}
 <div class="total d-flex">
-  <h5 class="mt-4">總金額：</h5>
-  <p class="mt-5 totalAmount"> {{ totalAmount }}</p>
+  <h5 class="mt-4 ml-3">總金額：</h5>
+  <p class="mt-5 ml-5 totalAmount"> {{ totalAmount }}</p>
 </div>
 
-
+{{!-- expenses list --}}
 <table class="table">
   {{!-- <thead>
     <tr>
-      <th scope="col">日期</th>
-      <th scope="col">名稱</th>
       <th scope="col">類別</th>
+      <th scope="col">名稱</th>
+      <th scope="col">日期</th>
       <th scope="col">金額</th>
       <th scope="col">管理</th>
     </tr>
@@ -32,7 +33,7 @@
       <th>{{this.name}}</th>
       <th class="amount align-middle" rowspan="2">{{this.amount}}</th>
       <th class="management align-middle" rowspan="2">
-        <a class="btn btn-success mr-2" href="./expenses/{{ this._id }}/edit">Edit</a>
+        <a class="btn btn-success m-2" href="./expenses/{{ this._id }}/edit">Edit</a>
         <form action="./expenses/{{ this._id }}/?_method=DELETE" method="POST" style="display: inline;">
           <button class="btn btn-danger" type="submit">Delete</button>
         </form>
@@ -41,11 +42,9 @@
     <tr>
       <td>{{this.date}}</td>
     </tr>
-
-
-
     {{/each}}
   </tbody>
 </table>
 
-<a class="btn btn-outline-info" href="./expenses/create">Create</a>
+{{!-- buttons --}}
+<a class="btn btn-outline-info btn-block mb-3" id="createButton" href="./expenses/create">Create Expense</a>

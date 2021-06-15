@@ -14,6 +14,7 @@ router.get('/', (req, res) => {
         .lean()
         .then(categories => {
           records.forEach(record => {
+            record.date = convertDate(record.date)
             totalAmount += record.amount
             const category = categories.find(category => {
               if(category.name === record.category) {
@@ -40,6 +41,7 @@ router.post('/filter', (req, res) => {
         .lean()
         .then(categories => {
           records.forEach((record) => {
+            record.date = convertDate(record.date)
             totalAmount += record.amount
             const category = categories.find(category => {
               if (category.name === record.category) {

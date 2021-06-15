@@ -1,5 +1,6 @@
 .container {
   margin: 0 auto;
+  max-width: 720px;
 }
 
 .totalAmount {
@@ -9,5 +10,25 @@
 
 .icon, .amount, .management {
   text-align: center;
-  
 }
+
+#createForm > label, input, select {
+  margin: 10px;
+}
+
+#editForm > label, input, select {
+  margin: 10px;
+}
+
+#filterSelect {
+  background-color: #f1cc7a;
+  color: #3d2c06;
+  font-size: 16px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  max-width: 675px;
+}
+
+.icon {
+  color: #6c9de7;
+}
+
