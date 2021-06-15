@@ -1,6 +1,4 @@
 const express = require('express')
-const category = require('../../models/category')
-const record = require('../../models/record')
 const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
@@ -53,7 +51,6 @@ router.post('/filter', (req, res) => {
         })
     })
 })
-
 
 // functions
 // getDate
