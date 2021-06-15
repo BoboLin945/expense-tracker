@@ -12,6 +12,11 @@ db.once('open', () => {
       date: record.date,
       amount: record.amount
     })
+      .then(() => {
+        console.log(`insert category done!`)
+        return db.close()
+      })
+      .then(() => console.log(`db connection close!`))
   })
   console.log('done!')
 })
