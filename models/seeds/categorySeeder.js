@@ -5,16 +5,18 @@ const db = require('../../config/mongoose')
 const categories = require('../../categories.json')
 
 db.once('open', () => {
-  categories.categories.forEach(category => {
-    Category.create({
-      name: category.name,
-      icon: category.icon
-    })
-      .then(() => {
-        console.log(`insert category done!`)
-        return db.close()
+  let categoriesData = []
+  categories.categories.forEach((category) => {
+    categoriesData.push(
+      {
+        name: category.name,
+        icon: category.icon
       })
-      .then(() => console.log(`db connection close!`))
   })
+  Category.create(categoriesData)
+    .then(() => {
+      console.log(`insert categories done!`)
+      db.close()
+    })
   console.log('done!')
 })
