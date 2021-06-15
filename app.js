@@ -3,6 +3,11 @@ const PORT = 3000
 const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 
+// connect-flash
+const session = require('express-session')
+const flush = require('connect-flash')
+const cookieParser = require('cookie-parser')
+
 // Require handlebars and just-handlebars-helpers
 const Handlebars = require('handlebars')
 const H = require('just-handlebars-helpers')
@@ -24,6 +29,17 @@ app.set('view engine', 'handlebars')
 
 // body-parser
 app.use(express.urlencoded({ extended: true }))
+
+// cookie-parser , session, flush
+app.use(cookieParser())
+
+app.use(session({
+  secret: 'secret',
+  cookie: { maxAge: 60000 },
+  saveUninitialized: false,
+  resave: true,
+}))
+app.use(flush())
 
 // method-override
 app.use(methodOverride('_method'))

@@ -35,7 +35,7 @@ router.get('/:id/edit', (req, res) => {
           const date = convertDate(record.date)
           const category = record.category
           // console.log(category)
-          res.render('edit', { record, date, category, categories })
+          res.render('edit', { record, date, category, categories, message: req.flash('message') })
         })
     })
     .catch(error => console.error(error))
@@ -53,7 +53,10 @@ router.put('/:id', (req, res) => {
       record.amount = amount
       return record.save()
     })
-    .then(() => res.redirect(`/expenses/${id}/edit`))
+    .then(() => {
+      req.flash('message', '修改成功')
+      res.redirect(`/expenses/${id}/edit`)
+    })
     .catch(error => console.log(error))
 })
 
