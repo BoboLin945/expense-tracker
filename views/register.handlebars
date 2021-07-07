@@ -3,19 +3,20 @@
   <form action="/users/register" method="POST">
     <div class="form-group">
       <label for="name"></label>
-      <input type="name" id="name" name="name" placeholder="username">
+      <input type="name" id="name" name="name" placeholder="username" value="{{name}}">
     </div>
     <div class="form-group">
       <label for="email"></label>
-      <input type="email" id="email" name="email" placeholder="email">
+      <input type="email" id="email" name="email" placeholder="email" value="{{email}}">
     </div>
     <div class="form-group">
       <label for="password"></label>
-      <input type="password" id="password" name="password" placeholder="password">
+      <input type="password" id="password" name="password" placeholder="password" value="{{password}}">
     </div>
     <div class="form-group">
       <label for="confirmPassword"></label>
-      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="confirm password">
+      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="confirm password"
+        value="{{confirmPassword}}">
     </div>
     <button type="submit" class="btn btn-primary btn-block">Register</button>
   </form>
