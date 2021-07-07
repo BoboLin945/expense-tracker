@@ -1,0 +1,25 @@
+<div class="register-form mt-5">
+  <h2 id="register-title">Register An Account</h2>
+  <form action="/users/register" method="POST">
+    <div class="form-group">
+      <label for="name"></label>
+      <input type="name" id="name" name="name" placeholder="username">
+    </div>
+    <div class="form-group">
+      <label for="email"></label>
+      <input type="email" id="email" name="email" placeholder="email">
+    </div>
+    <div class="form-group">
+      <label for="password"></label>
+      <input type="password" id="password" name="password" placeholder="password">
+    </div>
+    <div class="form-group">
+      <label for="confirmPassword"></label>
+      <input type="password" id="confirmPassword" name="confirmPassword" placeholder="confirm password">
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Register</button>
+  </form>
+  <p class="lead">
+    Have an Account ? <a href="/users/login">Login</a>
+  </p>
+</div>
