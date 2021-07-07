@@ -8,6 +8,8 @@ const session = require('express-session')
 const flush = require('connect-flash')
 const cookieParser = require('cookie-parser')
 
+const usePassport = require('./config/passport')
+
 // Require handlebars and just-handlebars-helpers
 const Handlebars = require('handlebars')
 const H = require('just-handlebars-helpers')
@@ -34,10 +36,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 app.use(session({
-  secret: 'secret',
-  cookie: { maxAge: 60000 },
-  saveUninitialized: false,
-  resave: true,
+  secret: 'ThisIsBoboExpenseTracker',
+  resave: false,
+  saveUninitialized: true,
 }))
 app.use(flush())
 
@@ -46,6 +47,9 @@ app.use(methodOverride('_method'))
 
 // static files
 app.use(express.static('public'))
+
+// passport
+usePassport(app)
 
 // use routes
 app.use(routes)
