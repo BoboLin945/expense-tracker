@@ -23,7 +23,7 @@
 
   {{!-- navbar --}}
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Expense Tracker</a>
+    <a class="navbar-brand" href="/">{{#if isAuthenticated}} {{user.name}}'s {{/if}} Expense Tracker</a>
     {{#if isAuthenticated}}
     <a href="/users/logout" class="btn btn-outline-danger">Logout</a>
     {{else}}

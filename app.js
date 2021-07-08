@@ -1,10 +1,13 @@
 const express = require('express')
-const PORT = process.env.PORT || 3000
 const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
 const session = require('express-session')
 const flash = require('connect-flash')
 const cookieParser = require('cookie-parser')
+
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config()
+}
 
 const usePassport = require('./config/passport')
 
@@ -34,7 +37,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 app.use(session({
-  secret: 'ThisIsBoboExpenseTracker',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
 }))
@@ -64,6 +67,6 @@ app.use((req, res, next) => {
 // use routes
 app.use(routes)
 
-app.listen(PORT, () => {
-  console.log(`App is running on http://localhost:${PORT}`)
+app.listen(process.env.PORT, () => {
+  console.log(`App is running on http://localhost:${process.env.PORT}`)
 })
