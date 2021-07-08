@@ -12,12 +12,14 @@ router.get('/create', (req, res) => {
 
 // Create
 router.post('/', (req, res) => {
-  const addItem = req.body
+  const userId = req.user._id
+  const {name, date, category, amount} = req.body
   return Record.create({
-    name: addItem.name,
-    date: addItem.date,
-    category: addItem.category,
-    amount: addItem.amount
+    name,
+    date,
+    category,
+    amount,
+    userId
   })
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
@@ -25,8 +27,9 @@ router.post('/', (req, res) => {
 
 // Update Page
 router.get('/:id/edit', (req, res) => {
-  const id = req.params.id
-  Record.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  Record.findOne({ _id, userId })
     .lean()
     .then(record => {
       Category.find()
@@ -43,9 +46,10 @@ router.get('/:id/edit', (req, res) => {
 
 // Update
 router.put('/:id', (req, res) => {
-  const id = req.params.id
+  const userId = req.user._id
+  const _id = req.params.id
   const { name, category, date, amount } = req.body
-  return Record.findById(id)
+  return Record.findOne({ _id, userId })
     .then(record => {
       record.name = name
       record.date = date
@@ -55,15 +59,16 @@ router.put('/:id', (req, res) => {
     })
     .then(() => {
       req.flash('message', '修改成功')
-      res.redirect(`/expenses/${id}/edit`)
+      res.redirect(`/expenses/${_id}/edit`)
     })
     .catch(error => console.log(error))
 })
 
 // Delete
 router.delete('/:id', (req, res) => {
-  const id = req.params.id
-  Record.findById(id)
+  const userId = req.user._id
+  const _id = req.params.id
+  Record.findOne({ _id, userId })
     .then(record => record.remove())
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))

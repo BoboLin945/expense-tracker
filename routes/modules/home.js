@@ -4,7 +4,8 @@ const Record = require('../../models/record')
 const Category = require('../../models/category')
 
 router.get('/', (req, res) => {
-  Record.find()
+  const userId = req.user._id
+  Record.find({ userId })
     .lean()
     .then(records => {
       let totalAmount = 0
@@ -29,8 +30,9 @@ router.get('/', (req, res) => {
 
 // filter by category
 router.post('/filter', (req, res) => {
+  const userId = req.user._id
   const category = req.body.category
-  Record
+  Record.find({ userId })
     .aggregate([{ $match: { category: category } }])
     .then(records => {
       let totalAmount = 0
