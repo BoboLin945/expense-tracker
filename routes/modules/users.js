@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const User = require('../../models/user')
 const passport = require('passport')
+const bcrypt = require('bcryptjs')
 
 // login page
 router.get('/login', (req, res) => {
@@ -41,16 +42,20 @@ router.post('/register', (req, res) => {
         errors.push({ message: 'Email 已註冊過！' })
         return res.render('register', { errors, name, email, password, confirmPassword })
       }
-      // 建立 User
-      return User.create({
-        name,
-        email,
-        password
-      })
-        .then(() => res.redirect('/'))
-        .catch(error => console.log(error))
+      bcrypt
+        .genSalt(10)
+        .then(salt => bcrypt.hash(password, salt))
+        .then(hash => {
+          // 建立 User
+          return User.create({
+            name,
+            email,
+            password: hash
+          })
+            .then(() => res.redirect('/'))
+            .catch(error => console.log(error))
+        })
     })
-
 })
 
 // log out
