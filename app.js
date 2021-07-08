@@ -51,6 +51,13 @@ app.use(express.static('public'))
 // passport
 usePassport(app)
 
+// middleware setting res.locals
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
+
 // use routes
 app.use(routes)
 
