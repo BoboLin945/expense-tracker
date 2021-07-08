@@ -1,6 +1,7 @@
 <div class="register-form mt-5">
   <h2 id="register-title">Register An Account</h2>
   <form action="/users/register" method="POST">
+  {{> message}}
     <div class="form-group">
       <label for="name"></label>
       <input type="name" id="name" name="name" placeholder="username" value="{{name}}">

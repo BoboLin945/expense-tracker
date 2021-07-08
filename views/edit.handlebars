@@ -1,14 +1,7 @@
 <h4 class="mt-4 text-center">請編輯你的支出</h4>
 <p class="font-italic">* 為必填</p>
 
-{{#if message}}
-<div class="ml-2 alert alert-info alert-dismissible fade show" role="alert">
-  <strong>Great!</strong> {{message}}
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-{{/if}}
+{{> message}}
 {{!-- edit form --}}
 <form action="/expenses/{{ record._id }}/?_method=PUT" method="POST">
   <div class="form-group" id="editForm">

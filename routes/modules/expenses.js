@@ -58,7 +58,7 @@ router.put('/:id', (req, res) => {
       return record.save()
     })
     .then(() => {
-      req.flash('message', '修改成功')
+      req.flash('success_msg', '修改成功')
       res.redirect(`/expenses/${_id}/edit`)
     })
     .catch(error => console.log(error))

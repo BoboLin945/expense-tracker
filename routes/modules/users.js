@@ -11,7 +11,8 @@ router.get('/login', (req, res) => {
 // log in
 router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
-  failureRedirect: '/users/login'
+  failureRedirect: '/users/login',
+  failureFlash: true
 }))
 
 // register page
@@ -22,32 +23,41 @@ router.get('/register', (req, res) => {
 // register
 router.post('/register', (req, res) => {
   const { name, email, password, confirmPassword } = req.body
+  const errors = []
+  if (!name || !email || !password || !confirmPassword) {
+    errors.push({ message: '所有欄位皆為必填。' })
+  }
+  if (password !== confirmPassword) {
+    errors.push({ message: '密碼與確認密碼不相符。' })
+  }
+  if (errors.length) {
+    return res.render('register', { errors, name, email, password, confirmPassword })
+  }
+
   User.findOne({ email })
     .then(user => {
       // user 重複註冊
       if (user) {
-        console.log('User exists!')
-        return res.render('register', { name, email, password, confirmPassword })
+        errors.push({ message: 'Email 已註冊過！' })
+        return res.render('register', { errors, name, email, password, confirmPassword })
       }
-      if (password !== confirmPassword) {
-        return console.log('passwords is not matched!')
-      } else {
-        // 建立 User
-        return User.create({
-          name,
-          email,
-          password
-        })
-          .then(() => res.redirect('/'))
-          .catch(error => console.log(error))
-      }
+      // 建立 User
+      return User.create({
+        name,
+        email,
+        password
+      })
+        .then(() => res.redirect('/'))
+        .catch(error => console.log(error))
     })
+
 })
 
 // log out
 router.get('/logout', (req, res) => {
-  req.logout();
-  res.redirect('/users/login');
+  req.logout()
+  req.flash('success_msg', '成功登出。')
+  res.redirect('/users/login')
 })
 
 module.exports = router

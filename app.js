@@ -2,10 +2,8 @@ const express = require('express')
 const PORT = process.env.PORT || 3000
 const exphbs = require('express-handlebars')
 const methodOverride = require('method-override')
-
-// connect-flash
 const session = require('express-session')
-const flush = require('connect-flash')
+const flash = require('connect-flash')
 const cookieParser = require('cookie-parser')
 
 const usePassport = require('./config/passport')
@@ -40,7 +38,6 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
 }))
-app.use(flush())
 
 // method-override
 app.use(methodOverride('_method'))
@@ -51,10 +48,16 @@ app.use(express.static('public'))
 // passport
 usePassport(app)
 
+// connect-flash
+app.use(flash())
+
 // middleware setting res.locals
 app.use((req, res, next) => {
   res.locals.isAuthenticated = req.isAuthenticated()
   res.locals.user = req.user
+  res.locals.success_msg = req.flash('success_msg')
+  res.locals.warning_msg = req.flash('warning_msg')
+  res.locals.login_msg = req.flash('login_msg')
   next()
 })
 
