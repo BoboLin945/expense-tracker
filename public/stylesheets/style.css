@@ -28,6 +28,22 @@
   max-width: 675px;
 }
 
+#yearMonth {
+	background-color: #ed9128;
+  color: #3d2c06;
+  font-size: 16px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+	width: 50%;
+	height: 38px;
+  max-width: 675px;
+	border: none;
+	border-radius: 8px;
+}
+
+#reset-button {
+	margin-left: 200px;
+}
+
 .icon {
   color: #6c9de7;
 }

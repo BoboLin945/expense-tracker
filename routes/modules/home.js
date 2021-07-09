@@ -31,9 +31,15 @@ router.get('/', (req, res) => {
 // filter by category
 router.post('/filter', (req, res) => {
   const userId = req.user._id
-  const category = req.body.category
-  Record.find({ userId })
-    .aggregate([{ $match: { category: category } }])
+  const category = req.body.category ? req.body.category : { $ne: '' }
+  const inputMonth = req.body.yearMonth
+  const year = Number(inputMonth.split('-')[0]) ? Number(inputMonth.split('-')[0]) : { $ne: '' }
+  const month = Number(inputMonth.split('-')[1]) ? Number(inputMonth.split('-')[1]) : { $ne: '' }
+  Record
+    .aggregate([
+      { $project: { name: 1, amount: 1, userId: 1, date: 1, category: 1, 'year': { $year: '$date' }, 'month': { $month: '$date' } } },
+      { $match: { userId, category, year: year, month: month } }
+    ])
     .then(records => {
       let totalAmount = 0
       Category
@@ -49,7 +55,7 @@ router.post('/filter', (req, res) => {
               }
             })
           })
-          res.render('index', { records, categories, totalAmount, category })
+          res.render('index', { records, categories, totalAmount, category, inputMonth })
         })
     })
 })
