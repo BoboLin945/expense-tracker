@@ -22,6 +22,10 @@ const recordSchema = new Schema({
     ref: 'User',
     index: true,
     required: true
+  },
+  merchant: {
+    type: String,
+    required: false
   }
 })
 
