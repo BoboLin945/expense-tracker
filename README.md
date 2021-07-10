@@ -1,4 +1,4 @@
-<!-- ABOUT THE PROJECT 2-3 A12: 老爸的私房錢 -->
+<!-- ABOUT THE PROJECT 3 A3: 老爸的私房錢升級 -->
 ## :money_with_wings: Expense Tracker
 
 :moyai:
@@ -10,12 +10,13 @@ You can see on [heroku](https://intense-spire-30373.herokuapp.com/)
 
 1. 使用者可以從首頁瀏覽總花費金額及所有支出
   * 名稱
-  * 類別圖示
+  * 類別
   * 日期
   * 金額
 
-2. 使用者可以從首頁點擊「新增」，新增一筆支出
+2. 使用者可以從首頁點擊「Create Expense」，新增一筆支出
   * 名稱
+  * 商家
   * 類別
   * 日期
   * 金額
@@ -28,7 +29,11 @@ You can see on [heroku](https://intense-spire-30373.herokuapp.com/)
 
 4. 使用者可以從首頁點擊「Delete」，刪除該筆支出  
   
-5. 使用者可以從首頁選擇類別，僅顯示該類別所有支出
+5. 使用者可以從首頁選擇類別及年/月，顯示設定搜尋條件的支出，點擊「清除條件」可重新設立篩選條件。
+
+6. 新使用者可以註冊帳號並登入，使用自己的支出記帳。
+
+![image](expense-tracker-login.png)
 
 
 <!-- GETTING STARTED -->
@@ -63,8 +68,5 @@ http://localhost:3000/
 * [Express-Handlebars](https://www.npmjs.com/package/express-handlebars) (^5.3.2)
 * [Bootstrap](https://getbootstrap.com) (^4.3.1)
 * [mongoose](https://mongoosejs.com/) (^5.12.11)
-* [just-handlebars-helpers] (^1.0.18)
-* [method-override] (^3.0.0)
+* [passport] (^0.4.1)
 * [connect-flash] (^0.1.1)
-* [cookie-parser] (^1.4.5)
-* [express-session] (^1.17.2)
