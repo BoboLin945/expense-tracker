@@ -3,8 +3,8 @@
   <select id="filterSelect" class="form-control mt-4" name="category" onchange="this.form.submit()">
     <option disabled selected>請選擇類別</option>
     {{#each categories}}
-    <option value="{{ this.name }}" name="{{this.name}}" {{#if ( eq ../category this.name ) }} selected {{/if}}>
-      {{this.name}}</option>
+    <option value="{{ this.name }}" name="{{ this.name }}" {{#if ( eq ../category this.name ) }} selected {{/if}}>
+      {{ this.name }}</option>
     {{/each}}
   </select>
   <div>
@@ -12,7 +12,6 @@
       value="{{inputMonth}}" onchange="this.form.submit()">
     <a href="/" id="reset-button" class="btn btn-info">清除條件</a>
   </div>
- 
 </form>
 
 {{!-- totalAmount --}}
@@ -31,7 +30,8 @@
       <th class="amount align-middle" rowspan="2">{{this.amount}}</th>
       <th class="management align-middle" rowspan="2">
         <a class="btn btn-success m-2" href="./expenses/{{ this._id }}/edit">Edit</a>
-        <button type="button" class="btn btn-danger" id="delete-button" data-toggle="modal" data-target="#deleteModal" data-id="{{ this._id }}">
+        <button type="button" class="btn btn-danger" id="delete-button" data-toggle="modal" data-target="#deleteModal"
+          data-id="{{ this._id }}">
           Delete
         </button>
       </th>
