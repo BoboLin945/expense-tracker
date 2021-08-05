@@ -4,21 +4,17 @@ if (process.env.NODE_ENV !== 'production') {
 
 const db = require('../../config/mongoose')
 const Category = require('../category')
-const categories = require('../../categories.json')
+const categories = require('../../categories.json').categories
 
 db.once('open', () => {
-  let categoriesData = []
-  categories.categories.forEach((category) => {
-    categoriesData.push(
-      {
-        name: category.name,
-        icon: category.icon
-      })
-  })
-  Category.create(categoriesData)
+  Promise.all(categories.map(async category => {
+    await Category.create({
+      name: category.name,
+      icon: category.icon
+    })
+  }))
     .then(() => {
-      console.log(`insert categories done!`)
+      console.log('seed categories done!')
       db.close()
     })
-  console.log('done!')
 })

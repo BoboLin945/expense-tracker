@@ -10,7 +10,8 @@
       "name": "返鄉高鐵票",
       "category": "交通出行",
       "date": "2021-02-03",
-      "amount": 700
+      "amount": 700,
+      "merchant": "台灣高鐵"
     },
     {
       "name": "costco 採購",
@@ -22,13 +23,15 @@
       "name": "吃火鍋",
       "category": "餐飲食品",
       "date": "2021-03-07",
-      "amount": 299
+      "amount": 299,
+      "merchant": "肉多多"
     },
     {
       "name": "信用卡費",
       "category": "其他",
       "date": "2021-03-14",
-      "amount": 3500
+      "amount": 3500,
+      "merchant": "台新"
     }
   ]
 }

@@ -32,6 +32,7 @@ db.once('open', () => {
           category: records.records[i].category,
           date: records.records[i].date,
           amount: records.records[i].amount,
+          merchant: records.records[i].merchant,
           userId
         })
       ))
