@@ -4,6 +4,12 @@
 :moyai:
 You can see on [heroku](https://intense-spire-30373.herokuapp.com/)
 
+by use seed user
+
+email: root@example.com
+password: root1234
+
+
 ### :heavy_check_mark: Features
 
 ![image](expense-tracker-index.png)
