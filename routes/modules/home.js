@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Record = require('../../models/record')
 const Category = require('../../models/category')
+const { categoryIcon, convertDate } = require('../../public/javascripts/toolFunction')
 
 router.get('/', (req, res) => {
   const userId = req.user._id
@@ -16,9 +17,7 @@ router.get('/', (req, res) => {
             record.date = convertDate(record.date)
             totalAmount += record.amount
             const category = categories.find(category => {
-              if (category.name === record.category) {
-                record.icon = category.icon
-              }
+              categoryIcon(record, category)
             })
           })
           res.render('index', { records, categories, totalAmount })
@@ -38,7 +37,7 @@ router.post('/filter', (req, res) => {
   Record
     .aggregate([
       { $project: { name: 1, amount: 1, userId: 1, date: 1, category: 1, 'year': { $year: '$date' }, 'month': { $month: '$date' } } },
-      { $match: { userId, category, year: year, month: month } }
+      { $match: { userId, category, year, month } }
     ])
     .then(records => {
       let totalAmount = 0
@@ -50,31 +49,12 @@ router.post('/filter', (req, res) => {
             record.date = convertDate(record.date)
             totalAmount += record.amount
             const category = categories.find(category => {
-              if (category.name === record.category) {
-                record.icon = category.icon
-              }
+              categoryIcon(record, category)
             })
           })
           res.render('index', { records, categories, totalAmount, category, inputMonth })
         })
     })
 })
-
-// functions
-// getDate
-function convertDate(date) {
-  date = new Date(date)
-  year = date.getFullYear()
-  month = date.getMonth() + 1
-  day = date.getDate()
-
-  if (day < 10) {
-    day = '0' + day
-  }
-  if (month < 10) {
-    month = '0' + month
-  }
-  return (year + '-' + month + '-' + day)
-}
 
 module.exports = router
