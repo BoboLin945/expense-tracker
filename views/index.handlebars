@@ -70,14 +70,4 @@
 </div>
 
 {{!-- delete modal dataset --}}
-<script>
-  const expensesList = document.querySelector('#expenses-list')
-  const deleteSubmit = document.querySelector('#delete-submit')
-  expensesList.addEventListener('click', function deleteButtonClicked() {
-    if (event.target.matches('#delete-button')) {
-      const id = event.target.dataset.id
-      deleteSubmit.action = `./expenses/${id}/?_method=DELETE`
-    }
-  })
-
-</script>
+<script src="/javascripts/deleteModalFunction.js"></script>
